@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beating Heart with Neon Message</title>
+    <style>
+       
+        body {
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #28042a; 
+            margin: 0;
+            overflow: hidden; 
+            font-family: 'Arial', sans-serif;
+        }
+
+     
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 90px;
+            background-color: #ff0040; 
+            margin-bottom: 50px; 
+            animation: beat 1.2s infinite alternate; 
+            box-shadow: 0 0 10px #ff0040, 0 0 20px #ff0040;
+        }
+
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #ff0040;
+            border-radius: 50%; 
+        }
+
+        .heart::before { top: -50%; left: 0; }
+        .heart::after { top: 0; right: -50%; }
+        
+        .heart {
+            transform: rotate(-45deg);
+            transform-origin: 50% 100%; 
+        }
+
+        /* --- NEON MESSAGE STYLES --- */
+        .message-container {
+            text-align: center;
+        }
+
+        .message-container h3 {
+            color: #fff; /* White base color for the center of the glow */
+            font-size: 2.2em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding: 10px 20px;
+            margin: 0;
+
+            /* The magic: Multiple text-shadow layers create the neon effect */
+            text-shadow: 
+                0 0 7px #fff,        /* Smallest, brightest white glow */
+                0 0 10px #ff0040,     /* Medium red glow */
+                0 0 21px #ff0040,     /* Larger red glow */
+                0 0 42px #ff4da6,     /* Fuzzier pink glow */
+                0 0 82px #ff4da6,     /* Widest pink glow */
+                0 0 92px #ff4da6,
+                0 0 102px #ff4da6,
+                0 0 151px #ff4da6;
+            
+            /* Optional: Add a subtle blinking animation to the text */
+            animation: blink-neon 1.5s infinite alternate;
+        }
+        
+        /* --- ANIMATION KEYFRAMES --- */
+        @keyframes beat {
+            0% {
+                transform: rotate(-45deg) scale(1);
+            }
+            50% {
+                transform: rotate(-45deg) scale(1.15); 
+            }
+            100% {
+                transform: rotate(-45deg) scale(1);
+            }
+        }
+        
+        /* Keyframes for the subtle blinking effect on the neon text */
+        @keyframes blink-neon {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0.8; /* Dim slightly */
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <audio autoplay loop>
+        <source src="https://www.soundjay.com/human/heart-beat-01.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="heart"></div>
+
+    <div class="message-container">
+        <h3>
+               My heart beats only for you. I can't define how much I love you A love so pure ,so strong and true!
+        </h3>
+    </div>
+
+</body>
+</html>
