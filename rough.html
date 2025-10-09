@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jane Doe | Professional Portfolio</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles and font import */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        
+        :root {
+            --primary-color: #1e3a8a; /* Blue-900 */
+            --accent-color: #f59e0b; /* Amber-500 */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Slate-50 */
+            color: #1f2937; /* Gray-800 */
+        }
+        
+        .container-section {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Styling for the focus state for accessibility */
+        :focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header and Navigation -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <nav class="container-section py-4 flex justify-between items-center px-4" aria-label="Main Navigation">
+            <a href="#hero" class="text-2xl font-bold text-blue-800 hover:text-blue-900 transition duration-300" aria-label="Home">
+                J. Doe
+            </a>
+            <ul class="flex space-x-6">
+                <li><a href="#about" class="text-gray-600 hover:text-amber-500 font-medium transition duration-300 rounded-lg p-2 focus:bg-gray-100">About</a></li>
+                <li><a href="#projects" class="text-gray-600 hover:text-amber-500 font-medium transition duration-300 rounded-lg p-2 focus:bg-gray-100">Projects</a></li>
+                <li><a href="#contact" class="text-gray-600 hover:text-amber-500 font-medium transition duration-300 rounded-lg p-2 focus:bg-gray-100">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        
+        <!-- Hero Section -->
+        <section id="hero" class="container-section bg-gradient-to-r from-blue-700 to-blue-900 text-white rounded-b-2xl shadow-xl flex items-center justify-center min-h-[60vh] md:min-h-[70vh]" role="region" aria-label="Introduction">
+            <div class="text-center p-6 max-w-3xl">
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight">
+                    Hello, I'm <span class="text-amber-300">Jane Doe</span>
+                </h1>
+                <p class="text-xl md:text-2xl font-light mb-8 opacity-90">
+                    Full-Stack Developer specializing in building accessible and performant web applications.
+                </p>
+                <a href="#projects" class="inline-block bg-amber-500 text-gray-900 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-amber-400 transition duration-300 transform hover:scale-105 focus:ring-4 focus:ring-amber-300 focus:outline-none" role="button">
+                    View My Work
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="container-section" role="region" aria-labelledby="about-heading">
+            <h2 id="about-heading" class="text-4xl font-bold text-center mb-12 text-blue-800">About Me</h2>
+            <div class="flex flex-col lg:flex-row items-center lg:items-start gap-12">
+                
+                <!-- Profile Image -->
+                <div class="lg:w-1/3 flex justify-center">
+                    <!-- Placeholder image - use your actual profile photo URL here -->
+                    <img 
+                        src="https://placehold.co/300x300/1e3a8a/ffffff?text=Jane+Doe" 
+                        alt="A professional headshot of Jane Doe" 
+                        class="w-64 h-64 object-cover rounded-full shadow-2xl border-4 border-amber-500"
+                        onerror="this.onerror=null; this.src='https://placehold.co/300x300/1e3a8a/ffffff?text=Profile';"
+                    >
+                </div>
+
+                <!-- Bio and Skills -->
+                <div class="lg:w-2/3">
+                    <article class="prose max-w-none mb-8">
+                        <h3 class="text-2xl font-semibold mb-4 text-gray-700">My Journey</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            I am a passionate developer with five years of experience crafting seamless digital experiences. My core philosophy revolves around creating elegant, robust, and user-centric solutions. After earning my degree in Computer Science, I focused on the intersection of design and functionality, believing that the best code is both effective and invisible to the user. I've worked across various industries, from FinTech to e-commerce, gaining deep expertise in scalable cloud architectures and modern JavaScript frameworks.
+                        </p>
+                    </article>
+
+                    <!-- Skills Table -->
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-700">Technical Skills</h3>
+                    <div class="overflow-x-auto rounded-xl shadow-lg border border-gray-200">
+                        <table class="min-w-full divide-y divide-gray-200 bg-white">
+                            <caption class="sr-only">Table of technical skills categorized by area.</caption>
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Category
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Skills
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-blue-50">
+                                    <th scope="row" class="px-6 py-4 whitespace-nowrap font-semibold text-blue-800">
+                                        Frontend
+                                    </th>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">
+                                        React, Vue.js, Tailwind CSS, HTML5, CSS3, Accessibility (ARIA)
+                                    </td>
+                                </tr>
+                                <tr class="bg-gray-50 hover:bg-blue-50">
+                                    <th scope="row" class="px-6 py-4 whitespace-nowrap font-semibold text-blue-800">
+                                        Backend
+                                    </th>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">
+                                        Node.js (Express), Python (Django/Flask), REST APIs, GraphQL
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-blue-50">
+                                    <th scope="row" class="px-6 py-4 whitespace-nowrap font-semibold text-blue-800">
+                                        Database & DevOps
+                                    </th>
+                                    <td class="px-6 py-4 whitespace-nowrap text-gray-700">
+                                        PostgreSQL, MongoDB, Docker, AWS (S3, EC2), Git
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects" class="container-section bg-gray-100 rounded-xl" role="region" aria-labelledby="projects-heading">
+            <h2 id="projects-heading" class="text-4xl font-bold text-center mb-12 text-blue-800">Selected Projects</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <article class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-amber-500">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">FinTracker App</h3>
+                    <p class="text-gray-600 mb-4">
+                        A responsive personal finance dashboard built with React and a custom Node.js API. Features real-time data visualization using D3.js.
+                    </p>
+                    <ul class="flex flex-wrap gap-2 text-sm">
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">#React</li>
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">#Node.js</li>
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">#D3.js</li>
+                    </ul>
+                    <a href="#" class="mt-4 inline-block text-amber-600 hover:text-amber-800 font-medium focus:underline" aria-label="View FinTracker App project details (link placeholder)">View Details &rarr;</a>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-amber-500">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">E-Commerce Platform Redesign</h3>
+                    <p class="text-gray-600 mb-4">
+                        Led the frontend overhaul of a major retail site using Vue.js and a modular component library, resulting in a 30% increase in load speed.
+                    </p>
+                    <ul class="flex flex-wrap gap-2 text-sm">
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">#Vue.js</li>
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">#SCSS</li>
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">#Accessibility</li>
+                    </ul>
+                    <a href="#" class="mt-4 inline-block text-amber-600 hover:text-amber-800 font-medium focus:underline" aria-label="View E-Commerce Platform project details (link placeholder)">View Details &rarr;</a>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="bg-white p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-amber-500">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-3">Serverless Microservice</h3>
+                    <p class="text-gray-600 mb-4">
+                        Developed a Python/Flask microservice deployed on AWS Lambda for image processing, reducing latency and operational costs by 45%.
+                    </p>
+                    <ul class="flex flex-wrap gap-2 text-sm">
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">#Python</li>
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">#AWS Lambda</li>
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full font-medium">#PostgreSQL</li>
+                    </ul>
+                    <a href="#" class="mt-4 inline-block text-amber-600 hover:text-amber-800 font-medium focus:underline" aria-label="View Serverless Microservice project details (link placeholder)">View Details &rarr;</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="container-section" role="region" aria-labelledby="contact-heading">
+            <h2 id="contact-heading" class="text-4xl font-bold text-center mb-12 text-blue-800">Get In Touch</h2>
+            
+            <div class="max-w-lg mx-auto bg-white p-8 md:p-10 rounded-xl shadow-2xl border-t-8 border-blue-700">
+                <p class="text-center text-gray-600 mb-6">
+                    Have a project or opportunity? Let's connect!
+                </p>
+
+                <!-- Functional, Accessible Contact Form -->
+                <form id="contactForm" class="space-y-6" novalidate>
+                    
+                    <!-- Name Input -->
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            placeholder="e.g., Alex Johnson" 
+                            required 
+                            aria-required="true" 
+                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-amber-500 focus:ring-amber-500 transition duration-150"
+                        >
+                    </div>
+
+                    <!-- Email Input -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="you@example.com" 
+                            required 
+                            aria-required="true" 
+                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-amber-500 focus:ring-amber-500 transition duration-150"
+                        >
+                    </div>
+
+                    <!-- Message Textarea -->
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                        <textarea 
+                            id="message" 
+                            name="message" 
+                            rows="4" 
+                            placeholder="Tell me about your project or inquiry..." 
+                            required 
+                            aria-required="true" 
+                            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-amber-500 focus:ring-amber-500 transition duration-150 resize-y"
+                        ></textarea>
+                    </div>
+
+                    <!-- Status Message Box -->
+                    <div id="form-status" role="alert" aria-live="polite" class="hidden p-3 rounded-lg text-sm font-medium">
+                        <!-- Success or error messages will be displayed here -->
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit" 
+                        class="w-full bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-blue-800 transition duration-300 transform hover:scale-[1.01] focus:ring-4 focus:ring-blue-300 focus:outline-none"
+                    >
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8" role="contentinfo">
+        <div class="container-section text-center text-sm px-4">
+            <p>&copy; 2025 Jane Doe. All rights reserved.</p>
+            <p class="mt-2 text-gray-400">Built with Semantic HTML and Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Form Submission Handling -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('contactForm');
+            const formStatus = document.getElementById('form-status');
+
+            const showStatus = (message, isSuccess) => {
+                formStatus.textContent = message;
+                formStatus.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
+                if (isSuccess) {
+                    formStatus.classList.add('bg-green-100', 'text-green-700');
+                } else {
+                    formStatus.classList.add('bg-red-100', 'text-red-700');
+                }
+            };
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // Simple validation check
+                if (!form.checkValidity()) {
+                    showStatus("Please fill out all required fields correctly.", false);
+                    return;
+                }
+
+                // Gather form data
+                const formData = new FormData(form);
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const message = formData.get('message');
+
+                // Log data to console (simulating backend submission)
+                console.log("--- Form Submission Data ---");
+                console.log(`Name: ${name}`);
+                console.log(`Email: ${email}`);
+                console.log(`Message: ${message}`);
+                console.log("----------------------------");
+
+                // Provide success feedback to the user
+                showStatus(`Thank you, ${name}! Your message has been received (simulated). I will be in touch shortly.`, true);
+                
+                // Clear the form fields after successful (simulated) submission
+                form.reset();
+            });
+        });
+    </script>
+
+</body>
+</html>
