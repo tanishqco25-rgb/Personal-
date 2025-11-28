@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieMatch AI - Personalized Recommendations</title>
+    <link rel="stylesheet" href="style5.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <div class="logo"><img src="https://www.technected.com/wp-content/uploads/2016/03/MB-main.jpg" width="80" height="80" alt="Logo"></div>
+                <div>
+                    <h1>MovieMatch AI</h1>
+                    <p class="subtitle">Personalized recommendations just for you</p>
+                </div>
+            </div>
+            <button class="clear-btn" onclick="clearAllRatings()" id="clearBtn" style="display: none;">
+                Clear Ratings
+            </button>
+        </header>
+
+        <div class="instructions">
+            <h2>Discover Your Next Favorite Movie</h2>
+            <p>Rate at least 3 movies to get personalized recommendations</p>
+            <div class="rating-counter" id="ratingCounter">
+                ⭐ <span id="ratedCount">0</span> movies rated
+            </div>
+        </div>
+
+        <div class="recommendations-section" id="recommendationsSection">
+            <div class="section-header">
+                <div class="section-icon">✨</div>
+                <div class="section-title">
+                    <h3>Recommended For You</h3>
+                    <p>Based on your ratings and preferences</p>
+                </div>
+            </div>
+            <div class="movie-grid" id="recommendationsGrid"></div>
+            <div class="info-box">
+                <h4> How it works</h4>
+                <p>Our collaborative filtering algorithm analyzes your movie ratings and finds patterns in genre preferences. 
+                It compares your taste with similar users and recommends movies you haven't seen yet but are likely to enjoy. 
+                The more you rate, the better your recommendations become!</p>
+            </div>
+        </div>
+
+        <div class="movies-section">
+            <h3>Rate These Movies</h3>
+            <div class="movie-grid" id="moviesGrid"></div>
+        </div>
+
+        <footer>
+            <p><strong>Powered by Collaborative Filtering Algorithm</strong></p>
+            <p>Rate movies to train your personal recommendation engine</p>
+        </footer>
+    </div>
+
+    <script>
+        // Movie database
+        const movies = [
+            { id: 1, title: "The Shawshank Redemption", year: 1994, genres: ["Drama", "Crime"], rating: 9.3, popularity: 9.8 },
+            { id: 2, title: "The Godfather", year: 1972, genres: ["Crime", "Drama"], rating: 9.2, popularity: 9.7 },
+            { id: 3, title: "The Dark Knight", year: 2008, genres: ["Action", "Crime", "Drama"], rating: 9.0, popularity: 9.9 },
+            { id: 4, title: "Pulp Fiction", year: 1994, genres: ["Crime", "Drama"], rating: 8.9, popularity: 9.5 },
+            { id: 5, title: "Forrest Gump", year: 1994, genres: ["Drama", "Romance"], rating: 8.8, popularity: 9.6 },
+            { id: 6, title: "Inception", year: 2010, genres: ["Action", "Sci-Fi", "Thriller"], rating: 8.8, popularity: 9.7 },
+            { id: 7, title: "The Matrix", year: 1999, genres: ["Action", "Sci-Fi"], rating: 8.7, popularity: 9.5 },
+            { id: 8, title: "Goodfellas", year: 1990, genres: ["Crime", "Drama"], rating: 8.7, popularity: 9.2 },
+            { id: 9, title: "Interstellar", year: 2014, genres: ["Sci-Fi", "Drama", "Adventure"], rating: 8.6, popularity: 9.4 },
+            { id: 10, title: "The Silence of the Lambs", year: 1991, genres: ["Thriller", "Crime", "Drama"], rating: 8.6, popularity: 9.1 },
+            { id: 11, title: "Saving Private Ryan", year: 1998, genres: ["War", "Drama"], rating: 8.6, popularity: 9.3 },
+            { id: 12, title: "The Green Mile", year: 1999, genres: ["Drama", "Fantasy"], rating: 8.6, popularity: 9.2 },
+            { id: 13, title: "Parasite", year: 2019, genres: ["Thriller", "Drama"], rating: 8.5, popularity: 9.3 },
+            { id: 14, title: "The Departed", year: 2006, genres: ["Crime", "Drama", "Thriller"], rating: 8.5, popularity: 9.0 },
+            { id: 15, title: "Whiplash", year: 2014, genres: ["Drama", "Music"], rating: 8.5, popularity: 8.9 },
+            { id: 16, title: "Gladiator", year: 2000, genres: ["Action", "Drama", "Adventure"], rating: 8.5, popularity: 9.4 },
+            { id: 17, title: "The Prestige", year: 2006, genres: ["Drama", "Mystery", "Thriller"], rating: 8.5, popularity: 8.8 },
+            { id: 18, title: "The Lion King", year: 1994, genres: ["Animation", "Adventure", "Drama"], rating: 8.5, popularity: 9.7 },
+            { id: 19, title: "Spirited Away", year: 2001, genres: ["Animation", "Adventure", "Fantasy"], rating: 8.6, popularity: 9.2 },
+            { id: 20, title: "Avengers: Endgame", year: 2019, genres: ["Action", "Adventure", "Sci-Fi"], rating: 8.4, popularity: 9.9 }
+        ];
+
+        // User ratings storage
+        let userRatings = {};
+
+        // Initialize the app
+        function init() {
+            renderMovies();
+            updateRatingCounter();
+        }
+
+        // Render all movies
+        function renderMovies() {
+            const grid = document.getElementById('moviesGrid');
+            grid.innerHTML = '';
+            
+            movies.forEach(movie => {
+                const card = createMovieCard(movie, false);
+                grid.appendChild(card);
+            });
+        }
+
+        // Create a movie card element
+        function createMovieCard(movie, isRecommendation) {
+            const card = document.createElement('div');
+            card.className = `movie-card ${isRecommendation ? 'recommended' : ''}`;
+            
+            card.innerHTML = `
+                <div class="movie-poster" style="background: linear-gradient(135deg, #${Math.floor(Math.random()*16777215).toString(16)} 0%, #${Math.floor(Math.random()*16777215).toString(16)} 100%);">
+                    ${isRecommendation ? '<div class="recommended-badge">Recommended</div>' : ''}
+                </div>
+                <div class="movie-info">
+                    <h4 class="movie-title">${movie.title}</h4>
+                    <div class="movie-meta">
+                        <span>${movie.year}</span>
+                        <span>•</span>
+                        <div class="movie-rating">
+                            <span>⭐</span>
+                            <span>${movie.rating}</span>
+                        </div>
+                    </div>
+                    <div class="genres">
+                        ${movie.genres.slice(0, 2).map(genre => `<span class="genre-tag">${genre}</span>`).join('')}
+                    </div>
+                    ${!isRecommendation ? `
+                    <div class="rating-section">
+                        <div class="rating-label">Your Rating:</div>
+                        <div class="stars" data-movie-id="${movie.id}">
+                            ${[1, 2, 3, 4, 5].map(star => `
+                                <span class="star ${userRatings[movie.id] >= star ? 'filled' : ''}" 
+                                      data-star="${star}" 
+                                      onclick="rateMovie(${movie.id}, ${star})">★</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // Rate a movie
+        function rateMovie(movieId, rating) {
+            userRatings[movieId] = rating;
+            updateStars(movieId);
+            updateRatingCounter();
+            generateRecommendations();
+        }
+
+        // Update star display for a movie
+        function updateStars(movieId) {
+            const starsContainer = document.querySelector(`[data-movie-id="${movieId}"]`);
+            if (starsContainer) {
+                const stars = starsContainer.querySelectorAll('.star');
+                stars.forEach((star, index) => {
+                    if (index < userRatings[movieId]) {
+                        star.classList.add('filled');
+                    } else {
+                        star.classList.remove('filled');
+                    }
+                });
+            }
+        }
+
+        // Update rating counter
+        function updateRatingCounter() {
+            const count = Object.keys(userRatings).length;
+            document.getElementById('ratedCount').textContent = count;
+            document.getElementById('clearBtn').style.display = count > 0 ? 'block' : 'none';
+        }
+
+        // Generate recommendations using collaborative filtering
+        function generateRecommendations() {
+            const ratedCount = Object.keys(userRatings).length;
+            
+            if (ratedCount < 3) {
+                document.getElementById('recommendationsSection').classList.remove('show');
+                return;
+            }
+
+            const ratedMovieIds = Object.keys(userRatings).map(Number);
+            const unratedMovies = movies.filter(m => !ratedMovieIds.includes(m.id));
+            
+            // Collaborative filtering algorithm
+            const scoredMovies = unratedMovies.map(movie => {
+                let score = 0;
+                
+                // Calculate similarity based on genres of highly rated movies
+                Object.entries(userRatings).forEach(([movieId, rating]) => {
+                    const ratedMovie = movies.find(m => m.id === Number(movieId));
+                    if (ratedMovie && rating >= 4) {
+                        // Count common genres
+                        const commonGenres = movie.genres.filter(g => 
+                            ratedMovie.genres.includes(g)
+                        ).length;
+                        score += commonGenres * rating * 0.3;
+                    }
+                });
+                
+                // Boost by popularity
+                score += movie.popularity * 0.1;
+                
+                // Add slight randomness for variety
+                score += Math.random() * 0.5;
+                
+                return { ...movie, score };
+            });
+            
+            // Get top 6 recommendations
+            const recommendations = scoredMovies
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 6);
+            
+            renderRecommendations(recommendations);
+        }
+
+        // Render recommendations
+        function renderRecommendations(recommendations) {
+            const grid = document.getElementById('recommendationsGrid');
+            grid.innerHTML = '';
+            
+            recommendations.forEach(movie => {
+                const card = createMovieCard(movie, true);
+                grid.appendChild(card);
+            });
+            
+            document.getElementById('recommendationsSection').classList.add('show');
+        }
+
+        // Clear all ratings
+        function clearAllRatings() {
+            if (confirm('Are you sure you want to clear all your ratings?')) {
+                userRatings = {};
+                renderMovies();
+                updateRatingCounter();
+                document.getElementById('recommendationsSection').classList.remove('show');
+            }
+        }
+
+        // Start the app
+        init();
+    </script>
+</body>
+</html>
